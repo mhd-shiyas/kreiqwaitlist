@@ -31,10 +31,10 @@ export default function HeroMockup() {
       variants={slideInRight}
       initial="hidden"
       animate="visible"
-      className="hidden lg:block shrink-0"
+      className="flex justify-center mt-12 lg:mt-0 shrink-0"
     >
       {/* Main Card */}
-      <div className="animate-float w-[360px] rounded-[24px] bg-white border border-[#E8EAED] shadow-[0_24px_80px_rgba(0,0,0,0.10),0_4px_16px_rgba(0,0,0,0.06)] p-6">
+      <div className="animate-float w-full max-w-[360px] rounded-[24px] bg-white border border-[#E8EAED] shadow-[0_24px_80px_rgba(0,0,0,0.10),0_4px_16px_rgba(0,0,0,0.06)] p-6">
         {/* Header row */}
         <div className="flex items-center justify-between mb-5">
           <span className="font-inter text-[13px] font-medium text-[#0F0F11]">

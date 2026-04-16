@@ -31,7 +31,7 @@ export default function Hero() {
       <FloatingPathsBackground position={-1} />
 
       {/* Content */}
-      <div className="relative z-10 max-w-content mx-auto px-6 pt-[96px] pb-[100px]">
+      <div className="relative z-10 max-w-content mx-auto px-6 pt-[96px] pb-[140px] lg:pb-[100px]">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between lg:gap-16">
           {/* ── Left: Text ─────────────────────────────── */}
           <div className="flex-1 text-center lg:text-left max-w-[600px]">

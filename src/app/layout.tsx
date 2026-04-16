@@ -20,9 +20,6 @@ export const metadata: Metadata = {
   title: "Kreiq — The AI Operating System for Content Creators",
   description:
     "Strategy, style intelligence, social analytics, and monetisation. All in one minimal platform. Join the waitlist.",
-  icons: {
-    icon: "/kreiqwebsitelogo.png",
-  },
   openGraph: {
     title: "Kreiq — Your content, your income.",
     description:
