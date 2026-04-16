@@ -17,7 +17,7 @@ if (!getApps().length) {
 
 const db = getFirestore()
 const resend = new Resend(process.env.RESEND_API_KEY!)
-const emailSchema = z.string().email()
+const emailSchema = z.email()
 
 export async function POST(req: NextRequest) {
   try {
@@ -59,13 +59,17 @@ export async function POST(req: NextRequest) {
     // 5. Increment counter atomically
     await metaRef.set({ count: FieldValue.increment(1) }, { merge: true })
 
-    // 6. Send confirmation email
-    await resend.emails.send({
-      from:    'Kreiq <onboarding@resend.dev>',
-      to:      email,
-      subject: `You're #${position} on the Kreiq waitlist`,
-      html:    buildEmailHTML(position, email),
-    })
+    // 6. Send confirmation email (non-fatal — signup still succeeds if email fails)
+    try {
+      await resend.emails.send({
+        from:    'Kreiq <onboarding@resend.dev>',
+        to:      email,
+        subject: `You're #${position} on the Kreiq waitlist`,
+        html:    buildEmailHTML(position, email),
+      })
+    } catch (emailErr) {
+      console.error('Confirmation email failed (non-fatal):', emailErr)
+    }
 
     return NextResponse.json({ success: true, position })
   } catch (err) {

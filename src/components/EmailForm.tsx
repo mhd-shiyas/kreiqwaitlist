@@ -101,63 +101,66 @@ export default function EmailForm({ dark, id }: EmailFormProps) {
             key="form"
             onSubmit={handleSubmit}
             exit={{ x: "-100%", opacity: 0, transition: { duration: 0.3, ease: "easeIn" } }}
-            className="flex flex-col sm:flex-row gap-3"
+            className="flex flex-col gap-3"
           >
-            <div className="flex-1 relative">
-              <input
-                ref={inputRef}
-                type="email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (error) setError("");
-                }}
-                placeholder="Enter your email"
-                className={inputClass}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex-1">
+                <input
+                  ref={inputRef}
+                  type="email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (error) setError("");
+                  }}
+                  placeholder="Enter your email"
+                  className={inputClass}
+                  disabled={loading}
+                />
+              </div>
+
+              <button
+                type="submit"
                 disabled={loading}
-              />
-              <AnimatePresence>
-                {error && (
-                  <motion.p
-                    initial={{ opacity: 0, y: -4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -4 }}
-                    className={`absolute -bottom-6 left-0 font-inter text-[12px] ${dark ? "text-rose-300" : "text-rose-500"}`}
-                  >
-                    {error}
-                  </motion.p>
+                className={`group h-[52px] min-w-[180px] rounded-xl font-inter font-medium text-[15px] flex items-center justify-center gap-2 shrink-0 transition-all duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${
+                  dark
+                    ? "bg-white text-[#0040FF] hover:bg-white/90 shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_28px_rgba(0,0,0,0.22)] hover:scale-[1.02] active:scale-[0.98]"
+                    : "btn-gradient text-white"
+                }`}
+              >
+                {loading ? (
+                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
+                  </svg>
+                ) : (
+                  <>
+                    Get early access
+                    <span aria-hidden="true" className="relative inline-flex overflow-hidden w-[1em]">
+                      <span className="transition-transform duration-300 group-hover:translate-x-full">→</span>
+                      <span className="absolute inset-0 -translate-x-full transition-transform duration-300 group-hover:translate-x-0">→</span>
+                    </span>
+                  </>
                 )}
-              </AnimatePresence>
+              </button>
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className={`group h-[52px] min-w-[180px] rounded-xl font-inter font-medium text-[15px] flex items-center justify-center gap-2 shrink-0 transition-all duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${
-                dark
-                  ? "bg-white text-[#0040FF] hover:bg-white/90 shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_28px_rgba(0,0,0,0.22)] hover:scale-[1.02] active:scale-[0.98]"
-                  : "btn-gradient text-white"
-              }`}
-            >
-              {loading ? (
-                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" fill="none">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  />
-                </svg>
-              ) : (
-                <>
-                  Get early access
-                  <span aria-hidden="true" className="relative inline-flex overflow-hidden w-[1em]">
-                    <span className="transition-transform duration-300 group-hover:translate-x-full">→</span>
-                    <span className="absolute inset-0 -translate-x-full transition-transform duration-300 group-hover:translate-x-0">→</span>
-                  </span>
-                </>
+            <AnimatePresence>
+              {error && (
+                <motion.p
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  className={`font-inter text-[12px] ${dark ? "text-rose-300" : "text-rose-500"}`}
+                >
+                  {error}
+                </motion.p>
               )}
-            </button>
+            </AnimatePresence>
           </motion.form>
         ) : (
           <motion.div
