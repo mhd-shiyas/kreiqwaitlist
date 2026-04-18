@@ -23,7 +23,7 @@ export default function Footer() {
               &copy; 2026 Kreiq
             </span>
             <a
-              href="mailto:kreiqai@gmail.com"
+              href="mailto:hello@kreiq.ai"
               className="font-inter text-[13px] text-[#8C8FA3] hover:text-[#0040FF] transition-colors duration-200"
             >
               Contact

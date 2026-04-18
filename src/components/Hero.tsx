@@ -59,7 +59,8 @@ export default function Hero() {
                     initial="hidden"
                     animate="visible"
                     transition={{ delay: i * 0.07 }}
-                    className="inline-block mr-[0.3em]"
+                    className="inline-block"
+                    style={{ marginRight: "0.3em" }}
                   >
                     {word}
                   </motion.span>
@@ -73,7 +74,8 @@ export default function Hero() {
                     initial="hidden"
                     animate="visible"
                     transition={{ delay: (headingWords1.length + i) * 0.07 }}
-                    className="inline-block mr-[0.3em] gradient-text"
+                    className="inline-block gradient-text"
+                    style={{ marginRight: i < headingWords2.length - 1 ? "0.3em" : 0 }}
                   >
                     {word}
                   </motion.span>

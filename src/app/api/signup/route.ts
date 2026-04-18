@@ -79,33 +79,91 @@ export async function POST(req: NextRequest) {
 }
 
 function buildEmailHTML(position: number, email: string): string {
-  return `
-  <div style='font-family:Inter,sans-serif;max-width:480px;margin:0 auto;padding:40px 24px;background:#ffffff'>
-    <div style='text-align:center;margin-bottom:32px'>
-      <span style='font-family:Georgia,serif;font-size:28px;font-weight:700;color:#09090B'>KRE</span>
-      <span style='font-family:Georgia,serif;font-size:28px;font-weight:700;color:#7C3AED'>IQ</span>
-    </div>
-    <h1 style='font-size:22px;color:#09090B;text-align:center;margin-bottom:8px'>
-      You're in.</h1>
-    <p style='font-size:40px;font-weight:700;text-align:center;color:#7C3AED;margin:0 0 24px'>
-      #${position}</p>
-    <p style='font-size:15px;color:#71717A;text-align:center;line-height:1.6'>
-      You're number <strong style='color:#09090B'>${position}</strong> on the
-      Kreiq waitlist. We'll email you the moment beta opens.<br><br>
-      In the meantime, follow <strong>@kreiq</strong> for build updates.
-    </p>
-    <div style='text-align:center;margin-top:32px'>
-      <a href='https://instagram.com/kreiq'
-         style='display:inline-block;background:linear-gradient(135deg,#7C3AED,#06B6D4);
-                color:white;padding:12px 28px;border-radius:8px;text-decoration:none;
-                font-weight:600;font-size:14px'>
-        Follow @kreiq
-      </a>
-    </div>
-    <p style='font-size:11px;color:#D4D4D8;text-align:center;margin-top:40px'>
-      You signed up with ${email}.
-      <a href='https://kreiq.ai/unsubscribe?email=${encodeURIComponent(email)}'
-         style='color:#D4D4D8'>Unsubscribe</a>
-    </p>
-  </div>`
+  const ig = 'https://www.instagram.com/kreiqai?utm_source=qr&igsh=MW9jbW00eHF4ZnB6Nw=='
+  return `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#F4F6FB;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#F4F6FB;padding:40px 0;">
+    <tr><td align="center">
+      <table width="480" cellpadding="0" cellspacing="0" style="max-width:480px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 2px 24px rgba(0,64,255,0.07);">
+
+        <!-- Header bar -->
+        <tr>
+          <td style="background:#0040FF;padding:6px 0;"></td>
+        </tr>
+
+        <!-- Logo -->
+        <tr>
+          <td align="center" style="padding:36px 32px 0;">
+            <img src="https://kreiq.ai/kreiqlogo.png" alt="Kreiq" width="120" height="auto"
+                 style="display:block;border:0;outline:none;max-width:120px;height:auto;" />
+          </td>
+        </tr>
+
+        <!-- Divider -->
+        <tr>
+          <td align="center" style="padding:20px 32px 0;">
+            <div style="width:40px;height:2px;background:#0040FF;border-radius:2px;"></div>
+          </td>
+        </tr>
+
+        <!-- You're in -->
+        <tr>
+          <td align="center" style="padding:28px 32px 0;">
+            <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:700;color:#0F0F11;letter-spacing:-0.3px;">You're in.</p>
+          </td>
+        </tr>
+
+        <!-- Position number -->
+        <tr>
+          <td align="center" style="padding:12px 32px 0;">
+            <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:56px;font-weight:700;color:#0040FF;line-height:1;letter-spacing:-1px;">#${position}</p>
+          </td>
+        </tr>
+
+        <!-- Body copy -->
+        <tr>
+          <td align="center" style="padding:24px 40px 0;">
+            <p style="margin:0;font-family:-apple-system,BlinkMacSystemFont,'Inter',Arial,sans-serif;font-size:15px;color:#4B4D58;text-align:center;line-height:1.7;">
+              You're number <strong style="color:#0F0F11;">${position}</strong> on the Kreiq waitlist.<br>
+              We'll email you the moment beta opens.
+            </p>
+          </td>
+        </tr>
+
+        <!-- Follow line -->
+        <tr>
+          <td align="center" style="padding:16px 40px 0;">
+            <p style="margin:0;font-family:-apple-system,BlinkMacSystemFont,'Inter',Arial,sans-serif;font-size:15px;color:#4B4D58;text-align:center;line-height:1.7;">
+              In the meantime, follow <strong style="color:#0F0F11;">@kreiq</strong> for build updates.
+            </p>
+          </td>
+        </tr>
+
+        <!-- CTA Button -->
+        <tr>
+          <td align="center" style="padding:32px 32px 0;">
+            <a href="${ig}"
+               style="display:inline-block;background:#0040FF;color:#ffffff;padding:14px 36px;border-radius:10px;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,'Inter',Arial,sans-serif;font-weight:600;font-size:14px;letter-spacing:0.01em;">
+              Follow @kreiq
+            </a>
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td align="center" style="padding:36px 32px 32px;">
+            <p style="margin:0;font-family:-apple-system,BlinkMacSystemFont,'Inter',Arial,sans-serif;font-size:11px;color:#AAADB8;text-align:center;line-height:1.6;">
+              You signed up with ${email}.&nbsp;
+              <a href="https://kreiq.ai/unsubscribe?email=${encodeURIComponent(email)}" style="color:#AAADB8;text-decoration:underline;">Unsubscribe</a>
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`
 }

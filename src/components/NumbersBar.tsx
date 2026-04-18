@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { revealUp, revealStagger, VIEWPORT } from "@/lib/animations";
+import { revealUp, revealStagger } from "@/lib/animations";
 
 interface Stat {
   numericEnd: number;
@@ -65,7 +65,7 @@ function CountUp({
 
 export default function NumbersBar() {
   const ref = useRef(null);
-  const inView = useInView(ref, VIEWPORT);
+  const inView = useInView(ref, { once: true, margin: "0px" });
 
   return (
     <section ref={ref} className="relative bg-white pb-10 px-4 md:px-10">
